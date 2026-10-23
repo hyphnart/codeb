@@ -51,7 +51,7 @@ void FlowGraphView::setReport(const FlowReport &report) {
     scene_->clear();
     constexpr qreal width=236.0,height=68.0,xgap=105.0,ygap=90.0;
     QMap<quint64,QPointF> positions;
-    const int columns=std::clamp(static_cast<int>(std::sqrt(std::max(1,report.blocks.size()))),1,5);
+    const int columns=std::clamp(static_cast<int>(std::sqrt(std::max<qsizetype>(1,report.blocks.size()))),1,5);
     for(int i=0;i<report.blocks.size();++i) {
         const auto &block=report.blocks[i];
         const qreal x=(i%columns)*(width+xgap);
