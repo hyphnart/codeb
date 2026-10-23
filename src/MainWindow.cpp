@@ -202,7 +202,7 @@ void MainWindow::jumpToOffset() {
 }
 void MainWindow::calculateHash() {
     if(!doc_) return;
-    if(findChild<QFutureWatcher<QString>*>("HashWorker")) {
+    if(findChild<QObject*>("HashWorker")) {
         QMessageBox::information(this,"SHA-256","A hash calculation is already running.");
         return;
     }
@@ -309,7 +309,7 @@ void MainWindow::analyzeFile() {
     if(!doc_) {
         QMessageBox::information(this,"Analysis","Open a file first.");return;
     }
-    if(findChild<QFutureWatcher<AnalysisReport>*>("AnalysisWorker")) {
+    if(findChild<QObject*>("AnalysisWorker")) {
         QMessageBox::information(this,"Analysis","An analysis is already running.");
         return;
     }
@@ -505,7 +505,7 @@ void MainWindow::compareFiles() {
 }
 
 void MainWindow::closeEvent(QCloseEvent *event) {
-    if(property("yas.activeTasks").toInt()>0 || findChild<QFutureWatcher<QString>*>("HashWorker")) {
+    if(property("yas.activeTasks").toInt()>0 || findChild<QObject*>("HashWorker")) {
         QMessageBox::information(this,"Background tasks running",
             "Wait for active tasks to finish or cancel them before closing. "
             "This prevents worker callbacks from accessing destroyed UI objects.");
